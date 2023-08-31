@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 
-extern **buff;
+extern char **buff;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -42,8 +43,14 @@ typedef struct instruction_s
 
 char **create_buff(char *line);
 
+void free_buff(char **buff);
+
 void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number);
 
-int opcode_push(stack_t **stack, unsigned int line_number);
+void opcode_push(stack_t **stack, unsigned int line_number);
+
+void opcode_pall(stack_t **stack, unsigned int line_number);
+
+void opcode_nop(stack_t **stack, unsigned int line_number);
 
 #endif
