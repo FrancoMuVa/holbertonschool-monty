@@ -1,9 +1,33 @@
 #include "main.h"
 
 /**
+ * counter_token - counts the token of a line.
+ * @line: line of the file.
+ * @delim: delim.
+ * 
+ * Return: 0.
+*/
+
+int counter_token(char *line, const char *delim)
+{
+	char *token = NULL;
+	int num_token = 0;
+
+	token = strtok(line, delim);
+	while (token != NULL)
+	{
+		num_token++;
+		token = strtok(NULL, delim);
+	}
+	num_token++;
+	return (num_token);
+}
+
+
+/**
  * create_buff - create a buffer.
  * @line: line readed of a file.
- * 
+ *
  * Return: buffer.
 */
 
@@ -14,20 +38,14 @@ char **create_buff(char *line)
 	int num_token = 0, i = 0;
 
 	line_cpy = strdup(line);
-	token = strtok(line, delim);
-	while (token != NULL)
-	{
-		num_token++;
-		token = strtok(NULL, delim);
-	}
-	num_token++;
-	
+
+	num_token = counter_token(line, delim);
+
 	if (num_token == 1)
 	{
 		free(line_cpy);
-		return(NULL);
+		return (NULL);
 	}
-
 	buff = malloc(sizeof(char *) * num_token);
 	if (!buff)
 	{
@@ -35,9 +53,7 @@ char **create_buff(char *line)
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
-	printf("-->>line_cpy:%s\n", line_cpy);
 	token = strtok(line_cpy, delim);
-	printf("\n-->>token: %s|\n", token);
 	for (i = 0; token != NULL; i++)
 	{
 		buff[i] = malloc(sizeof(char) * strlen(token) + 1);
@@ -50,17 +66,16 @@ char **create_buff(char *line)
 		}
 		strcpy(buff[i], token);
 		token = strtok(NULL, delim);
-		printf("\n-->>token2: %s|\n", token);
 	}
 	buff[i] = NULL;
 	free(line_cpy);
-	return(buff);
+	return (buff);
 }
 
 /**
  * get_opcod - get the opcode.
- * 
- * 
+ *
+ *
 */
 
 void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
@@ -72,10 +87,8 @@ void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
 	};
 	int i = 0;
 
-	printf ("-->> Get opcode func\n");
 	while (i < 2)
 	{
-		printf ("\t\n-->> in while get_opcode\n");
 		if (strcmp(opcodes[i].opcode, str) == 0)
 			break;
 		i++;
