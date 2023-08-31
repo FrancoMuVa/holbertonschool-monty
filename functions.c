@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * counter_token - counts the token of a line.
