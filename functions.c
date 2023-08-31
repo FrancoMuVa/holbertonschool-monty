@@ -4,7 +4,7 @@
  * counter_token - counts the token of a line.
  * @line: line of the file.
  * @delim: delim.
- * 
+ *
  * Return: 0.
 */
 
@@ -73,9 +73,10 @@ char **create_buff(char *line)
 }
 
 /**
- * get_opcod - get the opcode.
+ * get_opcode - get the opcode.
+ * @str: string.
  *
- *
+ * Return: Nothing.
 */
 
 void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)

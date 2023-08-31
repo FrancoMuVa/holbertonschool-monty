@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 		buff = NULL;
-		while(1)
+		while (1)
 		{
 			ch_read = getline(&line, &in_size, file);
 			if (ch_read == -1)
