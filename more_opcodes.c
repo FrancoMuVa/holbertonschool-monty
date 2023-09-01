@@ -2,7 +2,7 @@
 
 /**
  * opcode_pop - removes the top element of the stack.
-  * @stack: doubly linked list.
+ * @stack: doubly linked list.
  * @line_number: line of file.
  *
  * Return: Nothing.
@@ -14,12 +14,43 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
 
     if (*stack == NULL)
     {
-        fprintf(stderr, "L%u: can't pop an empty stack", line_number);
+        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
     temp = *stack;
     *stack = temp->prev;
     free(temp);
+}
+
+/**
+ * opcode_swap - Swap the top two elements.
+ * @stack: doubly linked list.
+ * @line_number: line of file.
+ *
+ * Return: Nothing.
+*/
+
+void opcode_swap(stack_t **stack, unsigned int line_number)
+{
+    stack_t *temp = *stack;
+    int num = 0;
+
+    if (*stack != NULL)
+    {
+        if (temp->prev != NULL)
+        {
+            temp = temp->prev;
+            if (temp != NULL)
+            {
+                num = temp->n;
+                temp->n = temp->prev->n;
+                temp->prev->n = num;
+                return;            
+            }
+        }
+    }
+    fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+    exit(EXIT_FAILURE);
 }
 
 /**

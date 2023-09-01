@@ -105,12 +105,13 @@ void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
 		{"pop", opcode_pop},
+		{"swap", opcode_swap},
 		{"nop", opcode_nop},
 		{"err", opcode_err}
 	};
 	int i = 0;
 
-	while (i < 5)
+	while (i < 6)
 	{
 		if (strcmp(opcodes[i].opcode, str) == 0)
 			break;
