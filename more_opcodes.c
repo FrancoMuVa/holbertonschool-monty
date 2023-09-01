@@ -52,6 +52,34 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 }
 
 /**
+ * opcode_add - adds the top two elements.
+ * @stack: doubly linked list.
+ * @line_number: line of file.
+ *
+ * Return: Nothing.
+*/
+
+void opcode_add(stack_t **stack, unsigned int line_number)
+{
+    stack_t *temp = *stack;
+
+    if (*stack != NULL)
+    {
+        temp = temp->prev;
+        if (temp != NULL)
+        {
+            temp->n = temp->n + temp->next->n;
+            temp->next = NULL;
+            free(*stack);
+            *stack = temp;
+            return;
+        }
+    }
+    fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+    exit(EXIT_FAILURE);
+}
+
+/**
  * opcode_err - print an error.
  * @stack: doubly linked list.
  * @line_number: line of file.
