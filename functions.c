@@ -103,6 +103,7 @@ void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
 	instruction_t opcodes[] = {
 		{"push", opcode_push},
 		{"pall", opcode_pall},
+		{"pint", opcode_pint},
 		{"nop", opcode_nop}
 	};
 	int i = 0;

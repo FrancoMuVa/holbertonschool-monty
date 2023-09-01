@@ -98,6 +98,27 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+
+/**
+ * opcode_pint - prints the value at the top.
+ * @stack: doubly linked list.
+ * @line_number: line of file.
+ *
+ * Return: Nothing.
+*/
+
+void opcode_pint(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", temp->n);
+}
+
 /**
  * opcode_nop - Do nothing.
  * @stack: doubly linked list.
