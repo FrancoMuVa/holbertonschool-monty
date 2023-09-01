@@ -1,6 +1,25 @@
 #include "monty.h"
 
 /**
+ * free_list - free the doubly linked list.
+ * @stck: doubly linked list.
+ * 
+ * Return: Nothing.
+*/
+
+void free_list(stack_t *stack)
+{
+	stack_t *temp = stack;
+
+	while (stack != NULL)
+	{
+		temp = stack;
+		stack = temp->prev;
+        free(stack);
+	}
+}
+
+/**
  * counter_token - counts the token of a line.
  * @line: line of the file.
  * @delim: delim.
@@ -27,7 +46,8 @@ int counter_token(char *line, const char *delim)
 /**
  * create_buff - create a buffer.
  * @line: line readed of a file.
- *
+ * @stack: list.
+ * 
  * Return: buffer.
 */
 
@@ -38,9 +58,7 @@ char **create_buff(char *line)
 	int num_token = 0, i = 0;
 
 	line_cpy = strdup(line);
-
 	num_token = counter_token(line, delim);
-
 	if (num_token == 1)
 	{
 		free(line_cpy);
@@ -49,6 +67,7 @@ char **create_buff(char *line)
 	buff = malloc(sizeof(char *) * num_token);
 	if (!buff)
 	{
+		free(line);
 		free(line_cpy);
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);

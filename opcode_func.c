@@ -14,16 +14,24 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 	int i, num;
 
-	if (buff[1][0] == '-' || isdigit(buff[1][0]) != 0)
+	if (buff[1] != NULL)
 	{
-		for (i = 1; buff[1][i]; i++)
+		if (buff[1][0] == '-' || isdigit(buff[1][0]) != 0)
 		{
-			if (isdigit(buff[1][i]) == 0)
+			for (i = 1; buff[1][i]; i++)
 			{
-				fprintf(stderr, "L%u: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
+				if (isdigit(buff[1][i]) == 0)
+				{
+					fprintf(stderr, "L%u: usage: push integer\n", line_number);
+					exit(EXIT_FAILURE);
+				}
 			}
 		}
+	}
+	else
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 	new = malloc(sizeof(stack_t));
 	if (!new)

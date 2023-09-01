@@ -7,7 +7,6 @@
 #include <string.h>
 #include <ctype.h>
 
-extern char **buff;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -25,6 +24,8 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
+extern char **buff;
 
 /**
  * struct instruction_s - opcode and its function
@@ -44,6 +45,8 @@ typedef struct instruction_s
 char **create_buff(char *line);
 
 void free_buff(char **buff);
+
+void free_list(stack_t *stack);
 
 void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number);
 

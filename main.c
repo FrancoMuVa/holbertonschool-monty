@@ -19,7 +19,6 @@ void free_buff(char **buff)
 	free(buff);
 }
 
-
 /**
  * main - main program.
  * @argc: number of arguments.
@@ -54,15 +53,20 @@ int main(int argc, char **argv)
 				return (0);
 			}
 			buff = create_buff(line);
-
+			line_number++;
 			if (buff != NULL)
 			{
-				line_number++;
 				get_opcode(buff[0])(&stack, line_number);
 				free_buff(buff);
 			}
 		}
 		free(line);
+		free_list(stack);
 		fclose(file);
+	}
+	else
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
 }
