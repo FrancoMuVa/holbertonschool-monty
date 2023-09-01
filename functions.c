@@ -46,7 +46,6 @@ int counter_token(char *line, const char *delim)
 /**
  * create_buff - create a buffer.
  * @line: line readed of a file.
- * @stack: list.
  *
  * Return: buffer.
 */
