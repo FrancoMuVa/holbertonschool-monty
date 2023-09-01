@@ -15,7 +15,7 @@ void free_list(stack_t *stack)
 	{
 		temp = stack;
 		stack = temp->prev;
-		free(stack);
+		free(temp);
 	}
 }
 

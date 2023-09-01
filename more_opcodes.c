@@ -14,6 +14,7 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
 
     if (*stack == NULL)
     {
+        free_list(*stack);
         fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
@@ -47,6 +48,7 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 
         }
     }
+    free_list(*stack);
     fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
     exit(EXIT_FAILURE);
 }
@@ -75,6 +77,7 @@ void opcode_add(stack_t **stack, unsigned int line_number)
             return;
         }
     }
+    free_list(*stack);
     fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
     exit(EXIT_FAILURE);
 }
@@ -89,7 +92,7 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 
 void opcode_err(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
+	free_list(*stack);
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buff[0]);
 	exit(EXIT_FAILURE);
 }

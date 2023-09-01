@@ -50,6 +50,9 @@ int main(int argc, char **argv)
 			ch_read = getline(&line, &in_size, file);
 			if (ch_read == -1)
 			{
+				fclose(file);
+				free(line);
+				free_list(stack);
 				return (0);
 			}
 			buff = create_buff(line);
@@ -60,8 +63,8 @@ int main(int argc, char **argv)
 				free_buff(buff);
 			}
 		}
-		free(line);
 		free_list(stack);
+		free(line);
 		fclose(file);
 	}
 	else
