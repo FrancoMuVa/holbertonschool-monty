@@ -135,7 +135,7 @@ void opcode_nop(stack_t **stack, unsigned int line_number)
 
 
 /**
- * opcode_err - Do nothing.
+ * opcode_err - print an error.
  * @stack: doubly linked list.
  * @line_number: line of file.
  *
