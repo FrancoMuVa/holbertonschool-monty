@@ -110,7 +110,7 @@ void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
 	};
 	int i = 0;
 
-	while (i < 4)
+	while (i < 5)
 	{
 		if (strcmp(opcodes[i].opcode, str) == 0)
 			break;
