@@ -104,6 +104,7 @@ void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number)
 		{"push", opcode_push},
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
+		{"pop", opcode_pop},
 		{"nop", opcode_nop},
 		{"err", opcode_err}
 	};

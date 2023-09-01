@@ -132,19 +132,3 @@ void opcode_nop(stack_t **stack, unsigned int line_number)
 	(void) stack;
 	(void) line_number;
 }
-
-
-/**
- * opcode_err - print an error.
- * @stack: doubly linked list.
- * @line_number: line of file.
- *
- * Return: Nothing.
-*/
-
-void opcode_err(stack_t **stack, unsigned int line_number)
-{
-	(void) stack;
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buff[0]);
-	exit(EXIT_FAILURE);
-}
