@@ -1,6 +1,30 @@
 #include "monty.h"
 
 /**
+ * check_isdigit - check for the second argument.
+ * @line_number: number of the line.
+ *
+ * Return: Nothing.
+*/
+
+void check_isdigit(unsigned int line_number)
+{
+	int i = 0;
+
+	if (buff[1][0] == '-' || isdigit(buff[1][0]) != 0)
+	{
+		for (i = 1; buff[1][i]; i++)
+		{
+			if (isdigit(buff[1][i]) == 0)
+			{
+				fprintf(stderr, "L%u: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+		}
+	}
+}
+
+/**
  * opcode_push - push to the stak.
  * @stack: doubly linked list.
  * @line_number: line of file.
@@ -12,21 +36,11 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 	stack_t *temp;
-	int i, num;
+	int num;
 
 	if (buff[1] != NULL)
 	{
-		if (buff[1][0] == '-' || isdigit(buff[1][0]) != 0)
-		{
-			for (i = 1; buff[1][i]; i++)
-			{
-				if (isdigit(buff[1][i]) == 0)
-				{
-					fprintf(stderr, "L%u: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-			}
-		}
+		check_isdigit(line_number);
 	}
 	else
 	{
@@ -40,17 +54,14 @@ void opcode_push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
 	temp = *stack;
 	num = atoi(buff[1]);
 	new->n = num;
 	new->next = NULL;
-
 	if (*stack == NULL)
 	{
 		new->prev = NULL;
-		*stack = new;
-	}
+		*stack = new; }
 	else
 	{
 		temp->next = new;

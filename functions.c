@@ -2,8 +2,8 @@
 
 /**
  * free_list - free the doubly linked list.
- * @stck: doubly linked list.
- * 
+ * @stack: doubly linked list.
+ *
  * Return: Nothing.
 */
 
@@ -15,7 +15,7 @@ void free_list(stack_t *stack)
 	{
 		temp = stack;
 		stack = temp->prev;
-        free(stack);
+		free(stack);
 	}
 }
 
@@ -47,7 +47,7 @@ int counter_token(char *line, const char *delim)
  * create_buff - create a buffer.
  * @line: line readed of a file.
  * @stack: list.
- * 
+ *
  * Return: buffer.
 */
 
