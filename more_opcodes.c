@@ -37,16 +37,14 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 
     if (*stack != NULL)
     {
-        if (temp->prev != NULL)
+        temp = temp->prev;
+        if (temp != NULL)
         {
-            temp = temp->prev;
-            if (temp != NULL)
-            {
-                num = temp->n;
-                temp->n = temp->prev->n;
-                temp->prev->n = num;
-                return;            
-            }
+            num = temp->n;
+            temp->n = temp->next->n;
+            temp->next->n = num;
+            return;            
+
         }
     }
     fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
