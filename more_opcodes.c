@@ -10,17 +10,17 @@
 
 void opcode_pop(stack_t **stack, unsigned int line_number)
 {
-    stack_t *temp = *stack;
+	stack_t *temp = *stack;
 
-    if (*stack == NULL)
-    {
-        free_list(*stack);
-        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-    temp = *stack;
-    *stack = temp->prev;
-    free(temp);
+	if (*stack == NULL)
+	{
+		free_list(*stack);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = *stack;
+	*stack = temp->prev;
+	free(temp);
 }
 
 /**
@@ -33,24 +33,24 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
 
 void opcode_swap(stack_t **stack, unsigned int line_number)
 {
-    stack_t *temp = *stack;
-    int num = 0;
+	stack_t *temp = *stack;
+	int num = 0;
 
-    if (*stack != NULL)
-    {
-        temp = temp->prev;
-        if (temp != NULL)
-        {
-            num = temp->n;
-            temp->n = temp->next->n;
-            temp->next->n = num;
-            return;            
+	if (*stack != NULL)
+	{
+		temp = temp->prev;
+		if (temp != NULL)
+		{
+			num = temp->n;
+			temp->n = temp->next->n;
+			temp->next->n = num;
+			return;
 
-        }
-    }
-    free_list(*stack);
-    fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
-    exit(EXIT_FAILURE);
+		}
+	}
+	free_list(*stack);
+	fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+	exit(EXIT_FAILURE);
 }
 
 /**
@@ -63,23 +63,23 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 
 void opcode_add(stack_t **stack, unsigned int line_number)
 {
-    stack_t *temp = *stack;
+	stack_t *temp = *stack;
 
-    if (*stack != NULL)
-    {
-        temp = temp->prev;
-        if (temp != NULL)
-        {
-            temp->n = temp->n + temp->next->n;
-            temp->next = NULL;
-            free(*stack);
-            *stack = temp;
-            return;
-        }
-    }
-    free_list(*stack);
-    fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
-    exit(EXIT_FAILURE);
+	if (*stack != NULL)
+	{
+		temp = temp->prev;
+		if (temp != NULL)
+		{
+			temp->n = temp->n + temp->next->n;
+			temp->next = NULL;
+			free(*stack);
+			*stack = temp;
+			return;
+		}
+	}
+	free_list(*stack);
+	fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+	exit(EXIT_FAILURE);
 }
 
 /**

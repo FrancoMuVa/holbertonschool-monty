@@ -19,6 +19,21 @@ void free_buff(char **buff)
 	free(buff);
 }
 
+
+FILE *open_file(char *filename)
+{
+	FILE *file;
+
+	file = fopen(filename, "r");
+	if (!file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
+
+	return (file);
+}
+
 /**
  * main - main program.
  * @argc: number of arguments.
@@ -38,12 +53,7 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		file = fopen(argv[1], "r");
-		if (!file)
-		{
-			fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-			exit(EXIT_FAILURE);
-		}
+		file = open_file(argv[1]);
 		buff = NULL;
 		while (1)
 		{
